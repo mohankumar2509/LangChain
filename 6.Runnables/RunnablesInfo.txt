@@ -1,0 +1,40 @@
+PDF Reader Application:
+
+1) PDF Load (Document Loader)
+2) Splits (Text Splitter)
+3) Embeddings
+4) Vector Store
+5)Retrieval (Query and find the similar docs from the embeddings)
+6) LLM
+7) Parse
+
+- too many chains increased code base, it would be tough for new Ai engineers to use the chains as list is too long.
+
+Runnables came as a solution [runnables combine individual blocks as chains]
+
+
+Runnable are of two types:
+ - Task Specific Runnables - Core LangChain components that have been converted into runnables so they can be used in pipelines like LLM Calls, Prompting
+ - Runnable premitives - fundamental building blocks for structuring execution logic in AI workflows. Helps orchestrate execution by defining how different runnables interact (sequentailly, parallely, conditionally)
+
+ Different Types of runnables.
+  - Runnable Sequence 
+       - Executes each step one after the other, passing the output of one step as the input to the next
+       - It is useful when you need to compose multiple runnables togeather in a structured workflows
+
+  - Runnable parallel
+      - it's a runnable primitive that allows multiple runnables to execute in parallel
+      - Each runnable receives the same input and processed it independently, producing a dictionary of outputs
+
+ - Runnable Passthrough
+     - It's a special runnable primitive that simply returns the input as output without modifying it.
+
+ - RunnableLambda
+     - it's a runnable primitive that allows you to apply custom python functions within an AI pipeline.
+     - it acts as a middleware between different AI components, enabling preprocessing, transformation, API calls, filtering and post-processing in langchain workflow.
+
+ - RunnableBranch
+    - RunnableBranch is a control flow component in LangChain that allows you to conditionally route inpput data to different chains or runnables based on custom logic
+    - It functions like an if/elif/else block for chains - where you define a set of condition functions, each associated with a runnable (e.g., LLM call, prompt chain, or tool). this first matching condition is executed. if no condition matches, a default runnable is used (if provided)
+    
+  

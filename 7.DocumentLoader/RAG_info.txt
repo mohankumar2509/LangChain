@@ -1,0 +1,87 @@
+RAG - a technique that combines information retrieval with language generation, where a model retrieves relevant documents from a knowledge base and then uses them as context to generate accurate and grounded responses.
+
+Benefits of using RAG:
+
+1) Use of up-to-date information
+2) Better Privacy
+3) No limit of Document Size
+
+to Develop RAG based systems, we have to master below 4 components
+1) Document Loaders
+2) Text Splitters
+3) Vector Stores
+4) Retrievers
+5) Memeory - this will be thought as part of LangGraph
+
+Document Loaders - we have a lot of document loaders below are few largely used
+1) Textloader
+2) PyPDFLoader
+3) WebBaseLoader
+4) CSVLoader
+
+Document Loader are components in Langchain used to load data from various sources into a standardized format (usually as Document Objects), which can then be used for chunking, embedding, retrieval, and generation.
+
+Document(page_content = "the Actual text content",
+         metadata = {"source":"filename.pdf",.....}
+)
+
+**TextLoader:**
+
+TextLoader is a simple and commonly used document loader in LangChain that reads plain text(.txt) files and converts them into Langchain Document Objects.
+
+Use Case: Ideal for loading chat logs, Scraped text, transcripts, code snippets, or any plain text data into a lnagchain pipeline
+Limitation: Works only with .txt files
+
+**PyPDFLoader:**
+
+PyPDFLoader is a document loader in LangChain used to load content from PDF files and convert each page into a Document Object.
+
+Limitations:
+It used the PyPDF library under the hood - not great with scanned PDFs or complex layouts
+
+|   Use Case                    | Recommended Loader     |
+| Sample, clean PDFs            | PyPDFLoader            |
+| PDFs with tables/columns      | PDFPlumberLoader       |
+| Scanned/Image PDFs            | UnstructuredPDFLoader or AmazonTextractPDFLoader|
+| Need Layout, Image Data       | PyMuPDFLoader          |
+| Want best structureextraction | UNstructuredPDFLoader  |
+
+**DirectoryLoader:**
+
+Directory Loader ia a document loader that lets you load multiple documents from a directory(folder) of files.
+
+| Glob Pattern  | What it loads                        |
+| **/*.txt      |  all .txt files in all subfolders    |
+| *.pdf         | all .pdf files in the root directory |
+| data/*.csv    | all .csv files in the data/ folder   |
+| **/*          | All files (any type, all folders)    |
+
+
+**Load vs Lazy-Load**
+
+load() 
+ - Eager loading (loading everything at once)
+ - Returns: a list of documents
+ - Loads all documenst immediately into Memeory
+ - Best when number of documents is small, you want everything loaded upfront
+
+Lazy_load() - Returns Generator of docs
+  - Lazy Loading(loads on demand)
+  - Returns: A generator of Document Objects
+  - Documments are not all loaded at once. they're fetched one at a time as Need
+  - Best when dealing with large documents or lots of files, want to stream processing without using lots of memory
+
+
+**WebBaseLoader**
+  - WebBaseLoader is a document loader in LangChain used to load and extract text content from web pages (URLs)
+  - It uses BeautifulSoup under the hood to parse HTML and extract visible text
+
+  When to use:
+  - For blogs, news articles, or public websites where the content is primarily text-based and static
+
+  Limitations:
+  - Doesn't handle JavaScript heavy pages well (use SeleniumURLLoader for that)
+  - Loads only static content (what's in the HTML, not what loads afetr the page renders)
+
+**CSVLoader**
+CSVLoader is a document loader used to load CSV files into LangChain Document Objects - One per row by default

@@ -1,0 +1,34 @@
+Text Splitting is the process of breaking large chunks of text (like articles, PDFs, HTML Pages, or books) into smaller, manageable pieces (chunks) that an LLM can handle effectively.
+
+Large Text  - Smaller chunks
+
+Overcoming model Limitations -
+    - Many Embeddings models and language models have maximum input size constraints. Splitting allows us to process documents that     would otherwise exceed these limits.
+
+Downstream tasks: Text Splitting improves nearly every LLM Powered tasks
+Embeddings - Short Chunks yield more accurate Vectors
+Semantic Search - Search results point to focused info, not noise
+Summarization - Prevents Hallucinations and topic draft
+
+Optimizing Computational resources: 
+Working with smaller chunks of text can be more memory-efficient and allow for better parallelization or processing tasks
+
+Text Splitters.
+ - Length Based
+ - Text Structure Based
+ - Document Structure Based
+ - Semantic Meaning Based
+
+textsplitter - demo
+ - https://chunkviz.up.railway.app/
+
+1) Length Based Text Splitting - splits the text based on characters count, no context consideration
+2) Text-Structured Based - Split Rule (\n\n --> Paragraph, \n --> line, - --> word, Character)
+3) Document Structure Based - Used to split Java, Python, Markdown text splitters.
+
+Semantic Meaning Based
+
+s1  s2  s3  s4  s5 ------ s6 
+|___|___|___|____|_________|
+  |   |   |   |       |
+ 0.5 0.6 0.7  1      0.9 [chuncking will happend based on standard deviations, and similar criterails]

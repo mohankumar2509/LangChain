@@ -1,0 +1,65 @@
+**Vector Stores:**
+
+A vector Store is a system designed to store and retrieve data represented as numerical vectors.
+
+Key Features:
+
+1. Storage - Ensures that vectors and their associated metadata are retained, whether in-memory for quick lookups or on-disk for durability and large-scale use.
+2. Similarity Search: Helps retrieve the vectors most similar to query vector
+3. Indexing - Provide a data structure or method that enables fast similarity searches on high-dimensional vectors (e.g., approximate nearest neighbor lookups)
+4. CRUD Operations - manage the lifecycle of data - adding new vectors, reading them, updating existing entries, removing outdated vectors.
+
+Use-cases:
+
+1. Semantic Search
+2. RAG 
+3. Recommendation Systems
+4. Image/Multimedia Search
+
+How Semantic Search happens:
+
+Clustering on documents happens --> Query distance to cluster centers -> picks nearest cluster and do cosine similarity with all the documents in that cluster.
+
+
+**Vector Store vs Vector Database**
+
+Vector Store:
+
+1) Typically refers to a lightweight library or service that focuses on storing vectors (Embeddings) and performing similarity search.
+2) May not include many traditional database features like transactions, rich query language, or role-based access control.
+3) Ideal for prototyping, smaller-scale applications
+4) Examples: FAISS (Where you store vectors and can query them by similarity, but you handle persistance and scaling separately)
+
+Vector Database:
+
+1) A full-fiedged database system designed to store and query vectors
+2) Offers additional "database-like" features
+    - Distributed architecture for horizontal scaling
+    - Durability and persistance (replication, backup/restore)
+    - Metadata handling (schemas, filters)
+    - Potential for ACID or near-ACID guarantees
+    - Authentication/Authorization and more advanced security
+3) Geared for production environments with significant scaling, Large datasets
+Examples: Milvus, Qdrant, Weaviate
+
+A vector database is effectively a vector store with extra database features (e.g., clustering, scaling, security, metadat filtering,and durability)
+
+
+**Vector Stores in Langchain**
+
+1) Supported Vector stores - Langchain integrates with multiple vector stores (FAISS, Pinecone, Chroma, Qdrant, Weaviate, etc.,) giving you flexibility in scale, features, and deployement.
+2) Common Interface: A uniform Vector store API lets you swap out one backend(e.g., FAISS) for another (e.g., Pinecone) with minimal code changes
+3) Metadata Handling: Most vector stores in langchain allow you to attach metadata (e.g., timestamps, authors) to each document, enabling filter-based retrieval
+
+**Chroma Vector Store:**
+
+Chroma is a lightweight, open-source vector database that is especially friendly for local development and small-to medium-scale production needs.
+
+Chrome tenancy and DB Hierarchy:
+
+                   Tenant
+        Database                  Database
+Collection   Collection     collection   collection
+Doc   Doc    Doc    Doc    Doc     Doc   Doc    Doc 
+
+Each Doc will have embeddings and metadata stored

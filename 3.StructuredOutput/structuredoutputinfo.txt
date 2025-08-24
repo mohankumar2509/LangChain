@@ -1,0 +1,37 @@
+
+
+In Lang Chain, Structured output refers to the practice of having language models return responses in a well-defined format(for example, JSON), rather than free-form text. this makes the model output easier to parse and work with programatically.
+
+
+Why do we need Structured output?
+
+Data Extraction ( Resume --> text --> LLm --> returns useful details in JSON format --> store in Database)
+API Building
+Agents
+
+Ways to get structured output:
+
+some LLM's itself can generate structured output themself where as some can't. Langchain has this capability to work both kind of LLM's.
+LLMs -> Can give structured output --> with_structured_output (Langchain call) --> method attribute in with_structured_output takes 2 possible values["json mode", "function calling"] --> Json Mode [Claude, gemini], function calling - open AI
+LLms -> Can't give structured output --> output parsers
+
+Data_format can be specified as below:
+  - TypedDictionary
+  - Pydabtic
+  - JSON_Schema
+
+
+TypedDictionary : it's a way to define a dictionary in python where you specify what keys and values should exist. it helps ensure that your dictionary follows a specific structure.
+
+Why use TypedDict?
+
+ - It tells python what keys are required and what types of values they shoould have.
+ - It does not validate data as runtime (it just helps with type hints for better coding)
+
+
+
+ -------------------------------------------------------------------------------------------------------------------------------------
+
+ Pydantic:
+
+ Pydantic is a data validation and data parsing library for python. it ensures that the data you work with is correct, structured and type-safe
