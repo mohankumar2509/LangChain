@@ -44,3 +44,4 @@ langchain_chroma
 faiss-cpu
 wikipedia
 youtube-transcript-api
+accelerate
